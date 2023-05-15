@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from . models import *
 from django.contrib.auth.hashers import make_password,check_password
 from django.contrib import messages
+from django.db.models import Q
 
 # Create your views here.
 def index(request):
@@ -40,7 +41,6 @@ def tenants(request):
     
 def viewstudents(request):
     stu = AddStudents.objects.all()
-    print(stu)
     addcourse = AddCourses.objects.all()
     return render(request,'viewstudents.html',{'stu':stu,
     'addcourse':addcourse})
@@ -86,9 +86,8 @@ def addcourses(request):
         AddCourses.objects.create(course = c_name, fees = c_fees, duration = c_duration, desc =c_desc)
         return redirect('/courses/')
     
-def deletecourse(request):
-    c_id = request.GET['id']
-    AddCourses.objects.get(id = c_id).delete()
+def deletecourse(request,pk):
+    AddCourses.objects.get(id = pk).delete()
     return redirect('/courses/')
     
 def addstudents(request):
@@ -100,7 +99,6 @@ def addstudents(request):
         stu_degree = request.POST.get('Degree')
         stu_addcourse_id = request.POST.get('course')
         stu_address = request.POST.get('Address')
-        # stu_file = request.POST.get('myfile')
         stu_course = AddCourses.objects.get(id = stu_addcourse_id)
         if AddStudents.objects.filter(semail = stu_email).exists():
             messages.error(request,'email already exists')
@@ -126,4 +124,14 @@ def addstudents(request):
         stu = AddStudents.objects.all()
         addcourse =AddCourses.objects.all()
         return render(request, 'viewstudents.html', {'stu': stu,'addcourse':addcourse})
-    
+
+
+def searchstu(request):
+    if 'q' in request.GET:
+        q = request.GET['q']
+        multiple_q = Q(Q(sname__icontains = q) | Q(semail__icontains = q)) |Q(smobile__icontains = q)
+        stu = AddStudents.objects.filter(multiple_q)
+    else:
+        stu = AddStudents.objects.all()
+    context = {'stu':stu}
+    return render(request,'viewstudents.html',context)
