@@ -86,6 +86,11 @@ def addcourses(request):
         AddCourses.objects.create(course = c_name, fees = c_fees, duration = c_duration, desc =c_desc)
         return redirect('/courses/')
     
+def deletecourse(request):
+    c_id = request.GET['id']
+    AddCourses.objects.get(id = c_id).delete()
+    return redirect('/courses/')
+    
 def addstudents(request):
     if request.method == 'POST':
         stu_name = request.POST.get('Name')

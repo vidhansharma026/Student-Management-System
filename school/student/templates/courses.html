@@ -183,45 +183,43 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Courses Name</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Fees
-                      </th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Duration
-                      </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Comment</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                      Delete</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                      Update</th>
+                      <th>Id</th>
+                      <th>Courses Name</th>
+                      <th>Fees</th>
+                      <th>Duration</th>
+                      <th>Type</th>
+                      <th>Delete</th>
+                      <th>Update</th>
                     </tr>
                   </thead>
                   <tbody>
                     {% for i in courses %}
                     <tr>
                       <td>
-                        <div class="d-flex px-2 py-1">
+                        <span class="text-xs font-weight-bold">{{i.id}}</span>
+                      </td>
+                      <td>
+                        <div class="d-flex px-4 py-1">
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">{{i.course}}</h6>
                           </div>
                         </div>
                       </td>
-                      
-                      <td class="align-middle text-sm">
+                      <td>
                         <span class="text-xs font-weight-bold">{{i.fees}}</span>
                       </td>
-                      <td class="align-middle text-center text-sm">
+                      <td>
                         <span class="text-xs font-weight-bold">{{i.duration}}</span>
                       </td>
-                      <td class="text-center text-sm">
+                      <td>
                         <span class="text-xs font-weight-bold">{{i.desc}}</span>
                       </td>
-                      {% comment %} <td class="align-middle text-center text-sm">
-                        <a href="" class="btn btn-danger">Delete</a>
+                      <td>
+                        <a href="/deletecourse/?id={{i.id}}" class="btn btn-danger my-1">Delete</a>
                       </td>
-                      <td class="align-middle text-center text-sm">
-                        <a href="" class="btn btn-warning">Update</a>
-                      </td> {% endcomment %}
+                      <td>
+                        <a href="" class="btn btn-info my-1">Update</a>
+                      </td>
                     </tr>
                     {% endfor %}
                   </tbody>
@@ -270,7 +268,7 @@
                     </div>
 
                     <div class="input-group input-group-outline mb-3">
-                      <textarea name="CourseDesc" class="form-control col-lg-12 col-md-6" placeholder="Leave a comment here"
+                      <textarea name="CourseDesc" class="form-control col-lg-12 col-md-6" placeholder="type of course"
                         id="floatingTextarea"></textarea>
                     </div>
 
