@@ -211,7 +211,9 @@
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Address</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        File</th>
+                        Delete</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                        Update</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -242,6 +244,12 @@
                       
                       <td class="text-center text-sm">
                         <span class="text-xs font-weight-bold">{{i.saddress}}</span>
+                      </td>
+                      <td>
+                        <a href="/deletestudent/{{i.id}}" class="btn btn-danger my-1">Delete</a>
+                      </td>
+                      <td>
+                        <a href="/updatestudent/{{i.id}}" class="btn btn-info my-1">Update</a>
                       </td>
                     </tr>
                     {% endfor %}

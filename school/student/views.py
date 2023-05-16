@@ -73,8 +73,7 @@ def login(request):
                 return redirect('/')
         else:
             messages.error(request,'email is not registered')
-            return redirect('/')
-        
+            return redirect('/')      
 
 def addcourses(request):
     if request.method == 'POST':
@@ -89,6 +88,20 @@ def addcourses(request):
 def deletecourse(request,pk):
     AddCourses.objects.get(id = pk).delete()
     return redirect('/courses/')
+
+def updatecourse(request,uid):
+    res = AddCourses.objects.get(id =uid)
+    return render(request, 'updatecourse.html',context={'stu':res,})
+
+def update_crs_data(request):
+    if request.method =='POST':
+        uid = request.POST['uid']
+        c_name = request.POST['CourseName']
+        c_fees = request.POST['CourseFees']
+        c_duration = request.POST['Duration']
+        c_desc = request.POST['CourseDesc']
+        AddCourses.objects.filter(id = uid).update(course = c_name, fees = c_fees, duration = c_duration, desc = c_desc)
+        return redirect('/courses/')
     
 def addstudents(request):
     if request.method == 'POST':
