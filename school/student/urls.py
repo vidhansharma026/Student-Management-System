@@ -19,7 +19,10 @@ urlpatterns = [
     path('addcourses/', views.addcourses, name='addcourses'),
     path('addstudents/', views.addstudents, name='addstudents'),
     path('deletecourse/<pk>/',views.deletecourse,name='deletecourse'),
+    path('deletestudent/<pk>/',views.deletestudent,name='deletestudent'),
     path('updatecourse/<int:uid>/',views.updatecourse,name='updatecourse'),
+    path('updatestudent/<int:sid>/',views.updatestudent,name='updatestudent'),
     path('update_crs_data/',views.update_crs_data,name='update_crs_data'),
+    path('update_stu_data/',views.update_stu_data,name='update_stu_data'),
     path('searchstu/',views.searchstu,name='searchstu'),
 ]

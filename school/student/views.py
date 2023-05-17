@@ -89,9 +89,18 @@ def deletecourse(request,pk):
     AddCourses.objects.get(id = pk).delete()
     return redirect('/courses/')
 
+def deletestudent(request,pk):
+    AddCourses.objects.get(id = pk).delete()
+    return redirect('/viewstudents/')
+
 def updatecourse(request,uid):
     res = AddCourses.objects.get(id =uid)
     return render(request, 'updatecourse.html',context={'stu':res,})
+
+def updatestudent(request,sid):
+    res = AddStudents.objects.get(id =sid)
+    addcourse = AddCourses.objects.all()
+    return render(request, 'updatestudent.html',context={'stu':res,'addcourse':addcourse})
 
 def update_crs_data(request):
     if request.method =='POST':
@@ -102,6 +111,20 @@ def update_crs_data(request):
         c_desc = request.POST['CourseDesc']
         AddCourses.objects.filter(id = uid).update(course = c_name, fees = c_fees, duration = c_duration, desc = c_desc)
         return redirect('/courses/')
+    
+def update_stu_data(request):
+    if request.method =='POST':
+        sid = request.POST['sid']
+        stu_name = request.POST['Name']
+        stu_email = request.POST['Email']
+        stu_mobile = request.POST['Mobile']
+        stu_college = request.POST['College']
+        stu_degree = request.POST['Degree']
+        stu_addcourse_id = request.POST.get('course')
+        stu_address = request.POST['Address']
+        stu_course = AddCourses.objects.get(id = stu_addcourse_id)
+        AddStudents.objects.filter(id = sid).update(sname = stu_name, semail = stu_email, smobile = stu_mobile, scollege = stu_college, sdegree = stu_degree, saddress = stu_address, scourses = stu_course)
+        return redirect('/viewstudents/')
     
 def addstudents(request):
     if request.method == 'POST':
