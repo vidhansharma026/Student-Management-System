@@ -53,7 +53,15 @@
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">view_in_ar</i>
             </div>
-            <span class="nav-link-text ms-1">All students</span>
+            <span class="nav-link-text ms-1">All Students</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/teacher/">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">All Teachers</span>
           </a>
         </li>
         <li class="nav-item">
@@ -64,34 +72,8 @@
             <span class="nav-link-text ms-1">Courses</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="/tenants/">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">Tenants</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="/employees/">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">receipt_long</i>
-            </div>
-            <span class="nav-link-text ms-1">Employees</span>
-          </a>
-        </li>
-
-
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="/profile/">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">person</i>
-            </div>
-            <span class="nav-link-text ms-1">Profile</span>
-          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white " href="/">
@@ -167,12 +149,15 @@
                 <a class="btn bg-gradient-dark mb-0" href="javascript:;" data-bs-toggle="modal"
                   data-bs-target="#exampleModal"><i class="material-icons text-sm">add</i>Add Students</a>
               </div>
-              <form class="form-inline my-2 my-lg-0" action="/searchstu/" >
-                <div class="col-lg-4">
-                <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
-                </div>
-                <div class="col-lg-6">
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <form class="form-inline my-2 my-lg-0" action="/search_student/" >
+                <div class="row">
+                  <div class="col-lg-4">
+                   <input class="form-control mr-sm-2 border border-primary" name="q" type="search" placeholder="Search" aria-label="Search">
+                  </div>
+                  <br>
+                  <div class="col-lg-6">
+                   <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                  </div>
                 </div>                 
               </form>
             </div>
@@ -316,8 +301,8 @@
                         <select name="course" class="form-select form-control" placeholder="courses" onfocus="focused(this)"
                           onfocusout="defocused(this)" aria-label="Default select example">
                           <option class="fw-lighter" selected>Courses</option>
-                          {% for course in addcourse %}
-                          <option value="{{course.id}}">{{course.course}} {{course.duration}} {{course.fees}}</option>
+                          {% for i in addcourse %}
+                          <option value="{{i.id}}">{{i.course}} {{i.duration}} {{i.fees}}</option>
                           {% endfor %}
                         </select>
                       </div>

@@ -1,4 +1,8 @@
 from django.db import models
+from tkinter import CASCADE
+from django.core.validators import RegexValidator
+
+alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
 
 # Create your models here.
 
@@ -28,3 +32,14 @@ class AddStudents(models.Model):
     
     def __str__(self):
         return self.sname
+     
+class AddTeacher(models.Model):
+    tname = models.CharField(max_length=100,blank=True, null=True, validators=[alphanumeric])
+    temail = models.EmailField(max_length=100)
+    tmobile = models.IntegerField()
+    taddress= models.CharField(max_length=255)
+    experience = models.CharField(max_length=100)
+    salary = models.FloatField()
+
+    def __str__(self):
+        return self.tname
