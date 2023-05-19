@@ -16,28 +16,7 @@ def dashboard(request):
 
 def courses(request):
     courses = AddCourses.objects.filter(is_active=True).order_by('id')
-    return render(request,'courses.html',{'request':request,'courses':courses})
-
-def employees(request):
-    return render(request,'employees.html')
-
-def hostel(request):
-    return render(request,'hostel_details.html')
-
-def notifications(request):
-    return render(request,'notifications.html')
-
-def pg_dashboard(request):
-    return render(request,'pg_dashboard.html')
-    
-def profile(request):
-    return render(request,'profile.html')
-    
-def tables(request):
-    return render(request,'tables.html')
-    
-def tenants(request):
-    return render(request,'tenants.html')
+    return render(request,'courses.html',{'courses':courses,})
     
 def teacher(request):
     teacher = AddTeacher.objects.all()
@@ -228,11 +207,10 @@ def search_student(request):
 def search_course(request):
     if 'q' in request.GET:
         q = request.GET['q']
-        multiple_q = Q(Q(course__icontains = q) | Q(fees__icontains = q)) |Q(duration__icontains = q)
-        addcourse = AddCourses.objects.filter(multiple_q)
+        courses = AddCourses.objects.filter(course__icontains = q)
     else:
-        addcourse = AddCourses.objects.all()
-    context = {'addcourse':addcourse}
+        courses = AddCourses.objects.all()
+    context = {'courses':courses}
     return render(request,'courses.html',context)
 
 def search_teacher(request):
