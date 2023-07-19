@@ -32,7 +32,7 @@ def form_data(request):
     if request.method =='POST':
         name = request.POST['name']
         email = request.POST['email']
-        password = make_password(request.POST['password'])
+        password = make_password(request.POST['password'])          
         if Registration.objects.filter(email = email).exists():
             messages.error(request,'email already exists')
             return redirect('/signup/')
@@ -80,7 +80,6 @@ def addstudents(request):
         if AddStudents.objects.filter(semail = stu_email).exists():
             messages.error(request,'email already exists')
             return redirect('/addstudents/')
-        
         elif AddStudents.objects.filter(smobile = stu_mobile).exists():
             messages.error(request,'mobile no is already exists')
             return redirect('/addstudents/')
